@@ -14,13 +14,14 @@ class Car{
         this.turn_radius = 0.005;
         //this.turn_acceleration = 0.001;
 
-        this.sensors = new Sensor(this);
+        this.sensors = new Sensor(this, 4, 200);
         this.controls = new Controls();
     }
 
     update(){
         this.#movement();
         this.sensors.update();
+    
     }
 
     #movement(){
@@ -69,8 +70,10 @@ class Car{
                     }
                 }
         
+                //Updates physics to match the position of the car
                 this.x-=Math.sin(this.angle)*this.velocity;
                 this.y-=Math.cos(this.angle)*this.velocity;
+                //console.log(this.sensors)
     }
     draw(ctx){
         ctx.beginPath();
@@ -83,9 +86,11 @@ class Car{
             this.height
         )
         ctx.fill();
-
+        
         ctx.restore();
 
-        this.sensors.draw(ctx)
+        if(this.sensors){
+            this.sensors.draw(ctx);
+        }
     }
 }

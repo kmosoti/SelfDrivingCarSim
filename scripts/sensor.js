@@ -14,7 +14,7 @@ class Sensor{
             const ray_angle = lerp(
                 this.ray_spread/2, 
                 -this.ray_spread/2, 
-                i/(this.ray_count-1)
+                this.ray_count==1?0.5:i/(this.ray_count-1)
             ) + this.car.angle;
 
             const start = {x:this.car.x, y:this.car.y};
@@ -42,5 +42,6 @@ class Sensor{
             )
             ctx.stroke();
         }
+        
     }
 }
